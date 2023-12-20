@@ -1,0 +1,11 @@
+I'm struggling writing a method for R's `is.integer()` function.
+
+First, I know that this is a primitive function:
+
+`is.primitive(is.integer)`
+`TRUE`
+
+According to the help for the `methods` package:
+
+"A number of the basic R functions are specially implemented as primitive functions . . . Most have implicit generics (see implicitGeneric), and become generic as soon as methods (including group methods) are defined on them. Others cannot be made generic."
+

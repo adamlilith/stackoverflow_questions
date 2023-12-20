@@ -1,0 +1,10 @@
+Package: methodsForPrimitives
+Type: Package
+Title: Illustrates a Problem with Defining Methods for Primitives
+Version: 0.1.0
+Imports:
+     methods,
+     terra
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
