@@ -1,0 +1,30 @@
+I am using the `v.extract` tool in **GRASSS** to select a part of a vector. When I do, the output has the same geographic extent as the input (note the lower `y` extent value is the same). Why is this happening and how can I "force" **GRASS** to recognize the new extent of the selected portion of the vector?
+
+Here is the vector.  I'm accessing **GRASS** through **R** using the `rgrass` pacakge, but the outcome is the same when I do it natively in **GRASS**.
+
+# `rgrass` implementation
+```
+library(rgrass)
+library(terra)
+
+vector <- vect('./madCoast4.gpkg') # vector from link above
+raster <- rast(vector) # raster to provide to initGRASS()
+
+# initiate GRASS
+rgrass::initGRASS(
+	gisBase = 'C:/Program Files/GRASS GIS 8.3',
+	home = tempdir(),
+	gisDbase = tempdir(),
+	location = 'example',
+	SG = raster
+)
+
+# export to GRASS and extract the northern feature
+write_VECT(vector, vname = 'madCoast4')
+rgrass::execGRASS('v.extract', input = 'madCoast4', output = 'selection', cats = '1')
+
+# compare extents of original and extracted feature
+rgrass::execGRASS('v.info', map = 'madCoast4')
+rgrass::execGRASS('v.info', map = 'selection')
+
+```
